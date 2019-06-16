@@ -63,7 +63,6 @@ export default class RandomPlanet extends Component {
 const PlanetView = ({ planet }) => {
     const { id, name, population,
         rotationPeriod, diameter } = planet;
-    // return <Spinner />;
 
     return (
         <React.Fragment>
