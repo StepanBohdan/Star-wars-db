@@ -14,7 +14,6 @@ export default class App extends Component {
 
     state = {
         showRandomPlanet: true,
-        selectedPerson: 1,
         hasError: false
     };
 
@@ -24,10 +23,6 @@ export default class App extends Component {
                 showRandomPlanet: !state.showRandomPlanet
             }
         });
-    };
-
-    onPersonSelected = (selectedPerson) => {
-        this.setState({ selectedPerson });
     };
 
     componentDidCatch() {
@@ -51,22 +46,12 @@ export default class App extends Component {
                 <div className="row mb2 button-row">
                     <button
                         className="toggle-planet btn btn-warning btn-lg"
-                        onClick={this.toggleRandomPlanet}>
+                        onClick={ this.toggleRandomPlanet }>
                         Toggle Random Planet
                     </button>
                     <ErrorButton/>
                 </div>
-
-                <div className="row mb2">
-                    <div className="col-md-6">
-                        <ItemList onItemSelected={this.onPersonSelected}/>
-                    </div>
-                    <div className="col-md-6">
-                        <PersonDetails personId={ this.state.selectedPerson }/>
-                    </div>
-
-                    {/*<PeoplePage/>*/}
-                </div>
+                <PeoplePage/>
             </div>
         );
     }

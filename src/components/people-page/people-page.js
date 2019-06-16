@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ItemList             from '../app/app';
+import ItemList             from '../item-list/item-list';
 import PersonDetails        from '../person-details';
 import ErrorIndicator       from '../error-indicator';
 
@@ -9,14 +9,14 @@ import './people-page.css';
 export default class PeoplePage extends Component {
     state = {
         selectedPerson: 1,
-        // hasError: false
+        hasError: false
     };
 
-    // componentDidCatch(error, info) {
-    //     this.setState({
-    //         hasError: true
-    //     });
-    // }
+    componentDidCatch(error, info) {
+        this.setState({
+            hasError: true
+        });
+    }
 
     onPersonSelected = (selectedPerson) => {
         this.setState({ selectedPerson });
@@ -24,17 +24,17 @@ export default class PeoplePage extends Component {
 
 
     render() {
-        // if (this.state.hasError) {
-        //     return <ErrorIndicator />;
-        // }
+        if (this.state.hasError) {
+            return <ErrorIndicator />;
+        }
 
         return (
             <div className="row mb2">
                 <div className="col-md-6">
-                    <ItemList onItemSelected={ this.onPersonSelected } />
+                    <ItemList onItemSelected={this.onPersonSelected}/>
                 </div>
                 <div className="col-md-6">
-                    <PersonDetails personId={ this.state.selectedPerson } />
+                    <PersonDetails personId={ this.state.selectedPerson }/>
                 </div>
             </div>
         );
