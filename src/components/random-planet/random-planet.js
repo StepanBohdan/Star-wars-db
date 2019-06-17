@@ -62,7 +62,7 @@ export default class RandomPlanet extends Component {
 
 const PlanetView = ({ planet }) => {
     const { id, name, population,
-        rotationPeriod, diameter } = planet;
+        rotation_period, diameter } = planet;
 
     return (
         <React.Fragment>
@@ -78,7 +78,7 @@ const PlanetView = ({ planet }) => {
                     </li>
                     <li className="list-group-item">
                         <span className="term">Rotation Period</span>
-                        <span>{ rotationPeriod }</span>
+                        <span>{ rotation_period }</span>
                     </li>
                     <li className="list-group-item">
                         <span className="term">Diameter</span>

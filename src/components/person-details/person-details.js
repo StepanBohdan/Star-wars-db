@@ -40,7 +40,7 @@ export default class PersonDetails extends Component {
       return <span>Select a person from a list</span>
     }
 
-    const { id, name, gender, birthYear, eyeColor } = this.state.person;
+    const { id, name, gender, birth_year, eye_color } = this.state.person;
 
     return (
         <div className="person-details card">
@@ -57,11 +57,11 @@ export default class PersonDetails extends Component {
               </li>
               <li className="list-group-item">
                 <span className="term">Birth Year</span>
-                <span>{ birthYear }</span>
+                <span>{ birth_year }</span>
               </li>
               <li className="list-group-item">
                 <span className="term">Eye Color</span>
-                <span>{ eyeColor }</span>
+                <span>{ eye_color }</span>
               </li>
             </ul>
             <ErrorButton />

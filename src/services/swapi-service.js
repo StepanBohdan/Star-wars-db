@@ -55,7 +55,7 @@ export default class SwapiService {
             id: this._extractId(planet),
             name: planet.name,
             population: planet.population,
-            rotationPeriod: planet.rotationPeriod,
+            rotation_period: planet.rotation_period,
             diameter: planet.diameter
         }
     };
@@ -66,11 +66,11 @@ export default class SwapiService {
             name: starship.name,
             model: starship.model,
             manufacturer: starship.manufacturer,
-            costInCredits: starship.costInCredits,
+            cost_in_credits: starship.cost_in_credits,
             length: starship.length,
             crew: starship.crew,
             passengers: starship.passengers,
-            cargoCapacity: starship.cargoCapacity
+            cargo_capacity: starship.cargo_capacity
         }
     };
 
@@ -79,8 +79,8 @@ export default class SwapiService {
             id: this._extractId(person),
             name: person.name,
             gender: person.gender,
-            birthYear: person.birthYear,
-            eyeColor: person.eyeColor
+            birth_year: person.birth_year,
+            eye_color: person.eye_color
         }
     }
 }
