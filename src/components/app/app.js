@@ -2,21 +2,19 @@ import React, { Component } from 'react';
 
 import Header         from '../header';
 import RandomPlanet   from '../random-planet';
-import ItemList       from '../item-list';
-import PersonDetails  from '../person-details';
-import ErrorButton    from '../error-button';
-import ErrorIndicator from '../error-indicator';
-import PeoplePage     from '../people-page';
+import ItemDetails    from '../item-details';
+import { Record  }    from '../item-details';
 
 import './app.css';
-import SwapiService   from "../../services/swapi-service";
+import SwapiService   from '../../services/swapi-service';
+import ErrorBoundry   from '../error-boundry';
+import Row            from '../row';
 
 export default class App extends Component {
     swapiService = new SwapiService();
 
     state = {
         showRandomPlanet: true,
-        hasError: false
     };
 
     toggleRandomPlanet = () => {
@@ -27,57 +25,50 @@ export default class App extends Component {
         });
     };
 
-    componentDidCatch() {
-        this.setState({ hasError: true })
-    }
-
     render() {
-        if (this.state.hasError) {
-            return <ErrorIndicator/>
-        }
 
         const planet = this.state.showRandomPlanet ?
-            <RandomPlanet/> :
-            null;
+            <RandomPlanet /> : null;
+
+        const { getPerson,
+            getStarship,
+            getPersonImage,
+            getStarshipImage } = this.swapiService;
+
+        const personDetails = (
+            <ItemDetails
+                itemId={11}
+                getData={ getPerson }
+                getImageUrl={ getPersonImage }>
+
+                <Record field="gender" label="Gender:" />
+                <Record field="eye_color" label="Eye Color:" />
+            </ItemDetails>
+        );
+
+        const starshipDetails = (
+            <ItemDetails
+                itemId={5}
+                getData={ getStarship }
+                getImageUrl={ getStarshipImage }>
+
+                <Record field="model" label="Model:" />
+                <Record field="length" label="Length:" />
+                <Record field="cost_in_credits" label="Cost:" />
+            </ItemDetails>
+        );
 
         return (
-            <div className="stardb-app container">
-                <Header />
+            <ErrorBoundry>
+                <div className="stardb-app container">
+                    <Header />
 
-                { planet }
-                <div className="row mb2 button-row">
-                    <button
-                        className="toggle-planet btn btn-warning btn-lg"
-                        onClick={ this.toggleRandomPlanet }>
-                        Toggle Random Planet
-                    </button>
-                    <ErrorButton/>
+                    <Row
+                        left={personDetails}
+                        right={starshipDetails} />
                 </div>
-                <PeoplePage/>
+            </ErrorBoundry>
 
-                <div className="row mb2">
-                    <div className="col-md-6">
-                        <ItemList onItemSelected={this.onPersonSelected}
-                        getData={this.swapiService.getAllPlanets}
-                        renderItem={(item) => item.name}/>
-                    </div>
-                    <div className="col-md-6">
-                        <PersonDetails personId={ this.state.selectedPerson }/>
-                    </div>
-                </div>
-
-                <div className="row mb2">
-                    <div className="col-md-6">
-                        <ItemList onItemSelected={this.onPersonSelected}
-                                  getData={this.swapiService.getAllStarships}
-                                  renderItem={(item) => item.name}/>
-                    </div>
-                    <div className="col-md-6">
-                        <PersonDetails personId={ this.state.selectedPerson }/>
-                    </div>
-                </div>
-
-            </div>
         );
     }
 };
