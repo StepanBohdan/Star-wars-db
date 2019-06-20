@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ErrorIndicator from "../people-page/people-page";
+import ErrorIndicator from '../error-indicator/error-indicator';
 
 export default class ErrorBoundry extends Component {
 
